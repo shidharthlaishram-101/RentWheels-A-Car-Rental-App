@@ -22,16 +22,15 @@ class _CarInfoPageState extends State<CarInfoPage> {
       final user = FirebaseAuth.instance.currentUser;
 
       if (user == null) {
-        // If the user is not authenticated
         return {'customerName': 'Not Signed In', 'phone_number': 'N/A', 'customerEmail': 'N/A'};
       }
 
       final userEmail = user.email;
 
-      // Fetch user document from Firestore
+
       final userDoc = await FirebaseFirestore.instance
           .collection('Users')
-          .doc(userEmail) // Assuming userEmail is the document ID
+          .doc(userEmail)
           .get();
 
       if (userDoc.exists) {
@@ -42,11 +41,9 @@ class _CarInfoPageState extends State<CarInfoPage> {
           'customerEmail': data?['email'] ?? 'Unknown Email',
         };
       } else {
-        // Document does not exist
         return {'customerName': 'User Not Found', 'phone_number': 'N/A', 'customerEmail': 'N/A'};
       }
     } catch (e) {
-      // Handle any errors
       print("Error fetching user details: $e");
       return {'customerName': 'Error', 'phone_number': 'N/A', 'customerEmail': 'N/A'};
     }
@@ -54,7 +51,6 @@ class _CarInfoPageState extends State<CarInfoPage> {
 
 
 
-  // Fetch car details from Firestore
   Future<DocumentSnapshot> _fetchCarDetails() {
     return FirebaseFirestore.instance.collection('Cars')
         .doc(widget.CarId)
@@ -69,9 +65,7 @@ class _CarInfoPageState extends State<CarInfoPage> {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            // Fix crossAxisAlignment placement
             children: [
-              // Back button
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: GestureDetector(
@@ -97,7 +91,6 @@ class _CarInfoPageState extends State<CarInfoPage> {
                 ),
               ),
               SizedBox(height: 25),
-              // FutureBuilder for car details
               FutureBuilder<DocumentSnapshot>(
                 future: _fetchCarDetails(),
                 builder: (context, snapshot) {
@@ -122,7 +115,7 @@ class _CarInfoPageState extends State<CarInfoPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Car Model and Brand
+
                         Center(
                           child: Text(
                             carData['model'] ?? 'Unknown Model',
@@ -145,7 +138,6 @@ class _CarInfoPageState extends State<CarInfoPage> {
                         ),
                         const SizedBox(height: 50),
 
-                        // Car Image PageView
                         SizedBox(
                           height: 200,
                           child: PageView.builder(
@@ -174,14 +166,12 @@ class _CarInfoPageState extends State<CarInfoPage> {
                         ),
                         const SizedBox(height: 16.0),
 
-                        // Specifications Bar
                         _buildSpecificationBar(carData),
                         const SizedBox(height: 24.0),
 
-                        // Price and Book Now Button
                         _buildPriceAndButton(
                           double.tryParse(carData['price'].toString()) ?? 0.0,
-                          carData['bookedState'] ?? 'available', // Pass bookedState to the method
+                          carData['bookedState'] ?? 'available',
                         ),
                         const SizedBox(height: 25),
                         Divider(
@@ -209,15 +199,13 @@ class _CarInfoPageState extends State<CarInfoPage> {
       ),
     );
   }
-
-  // Widget to build specifications bar
   Widget _buildSpecificationBar(Map<String, dynamic> carData) {
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      color: Colors.white, // Set the background color here
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

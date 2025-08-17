@@ -1,0 +1,2 @@
+C:/rentwheels/android/app/.cxx/RelWithDebInfo/2v321r3n/x86_64/CMakeFiles/edit_cache.dir
+C:/rentwheels/android/app/.cxx/RelWithDebInfo/2v321r3n/x86_64/CMakeFiles/rebuild_cache.dir

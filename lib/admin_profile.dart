@@ -83,14 +83,14 @@ class _AdminProfileState extends State<AdminProfile> {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.black,
-        title: const Text(
+        backgroundColor: Colors.white,
+        title: Text(
           "Change Phone Number",
-          style: TextStyle(color: Colors.white),
+          style: GoogleFonts.mulish(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         content: TextField(
           autofocus: true,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black),
           keyboardType: TextInputType.phone,
           decoration: const InputDecoration(
             hintText: "Enter New Phone Number",
@@ -103,16 +103,21 @@ class _AdminProfileState extends State<AdminProfile> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel', style: TextStyle(color: Colors.white)),
+            child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
           ),
           TextButton(
             onPressed: () async {
-              if (newPhoneNumber.isNotEmpty) {
+              // Add validation for the phone number
+              if (newPhoneNumber.isNotEmpty &&
+                  newPhoneNumber.length == 10 &&
+                  RegExp(r'^[0-9]+$').hasMatch(newPhoneNumber)) {
+                String formattedPhoneNumber = "+91$newPhoneNumber";
+
                 try {
                   await FirebaseFirestore.instance
                       .collection("Users")
                       .doc(currentuser.email)
-                      .update({'phone_number': newPhoneNumber});
+                      .update({'phone_number': formattedPhoneNumber});
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Phone number updated successfully!')),
@@ -122,15 +127,20 @@ class _AdminProfileState extends State<AdminProfile> {
                     const SnackBar(content: Text('Failed to update phone number. Please try again.')),
                   );
                 }
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Please enter a valid 10-digit phone number.')),
+                );
               }
               Navigator.pop(context);
             },
-            child: const Text('Save', style: TextStyle(color: Colors.white)),
+            child: const Text('Save', style: TextStyle(color: Colors.black)),
           ),
         ],
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {

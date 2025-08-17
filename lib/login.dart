@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rentwheels/components/square_tile.dart';
 import 'package:rentwheels/components/my_textfield.dart';
 import 'package:rentwheels/components/button.dart';
@@ -178,7 +179,9 @@ void wrongPasswordMessage() {
                         },
                         child: Text(
                           'Forgot Password?',
-                          style: TextStyle(color: Color.fromARGB(255, 0, 0, 255)),
+                          style: GoogleFonts.mulish(color: Color.fromARGB(255, 0, 0, 255),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

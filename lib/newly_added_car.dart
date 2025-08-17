@@ -79,9 +79,9 @@ class _NewlyAddedCarsState extends State<NewlyAddedCars> {
                         String brand = car['brand'] ?? 'N/A';
                         String model = car['model'] ?? 'N/A';
                         String price = car['price'] ?? 'N/A';
-                        List<dynamic>? imageURLs = car['imageURLs']; // Get the imageURL array from Firestore
+                        List<dynamic>? imageURLs = car['imageURLs'];
                         String? mainImageURL = imageURLs != null && imageURLs.isNotEmpty
-                            ? imageURLs[0] // Select the 0 index of the array as the main image
+                            ? imageURLs[0]
                             : null;
 
                         return GestureDetector(
@@ -118,7 +118,7 @@ class _NewlyAddedCarsState extends State<NewlyAddedCars> {
                                       ),
                                       image: DecorationImage(
                                         image: mainImageURL != null && mainImageURL.isNotEmpty
-                                            ? NetworkImage(mainImageURL) // Use the selected image URL
+                                            ? NetworkImage(mainImageURL)
                                             : const AssetImage('assets/images/default_car.jpg')
                                                 as ImageProvider,
                                         fit: BoxFit.cover,

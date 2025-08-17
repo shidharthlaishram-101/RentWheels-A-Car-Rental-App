@@ -1,0 +1,2 @@
+0 Perfect Condition
+1 Damaged Condition

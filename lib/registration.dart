@@ -193,7 +193,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   decoration: const InputDecoration(labelText: 'Email'),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value == null || value.isEmpty || !value.contains('@')) {
+                    if (value == null || value.isEmpty || !value.contains('@gmail.com')) {
                       return 'Please enter a valid email';
                     }
                     return null;

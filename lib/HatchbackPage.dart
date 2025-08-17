@@ -10,10 +10,10 @@ class HatchbackPage extends StatefulWidget {
 }
 
 class _HatchbackPageState extends State<HatchbackPage> {
-  // Method to fetch data from Firestore based on carType = 'Hatchback'
+
   Stream<List<DocumentSnapshot>> _fetchHatchbacks() {
     return FirebaseFirestore.instance
-        .collection('Cars') // Assuming 'Cars' is the global collection
+        .collection('Cars')
         .where('carType', isEqualTo: 'Hatchback')
         .snapshots()
         .map((snapshot) => snapshot.docs);
@@ -26,7 +26,7 @@ class _HatchbackPageState extends State<HatchbackPage> {
       backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
+          child: Container( 
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -103,7 +103,7 @@ class _HatchbackPageState extends State<HatchbackPage> {
                         return Card(
                           elevation: 4,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15), // Rounded corners
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           color: Colors.white,
                           child: Column(

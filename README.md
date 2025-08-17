@@ -1,16 +1,14 @@
-# rentwheels
+## RentWheels
 
-A seamless car rental app
+A seamless car rental app build using:
+- Flutter for UI & Framework
+- Firebase for Database and User Authentication
+- PhonePe for online transaction. (using demo account)
 
-## Getting Started
+## App Video ⬇️⬇️
+# User Page
+https://youtu.be/-tD_kSBihIM?si=ol-zQvNsQWm60Ob1
 
-This project is a starting point for a Flutter application.
+# Admin Page
+https://youtu.be/tYeuk3_esao?si=NvKZ2MW-HCvVsCeF
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

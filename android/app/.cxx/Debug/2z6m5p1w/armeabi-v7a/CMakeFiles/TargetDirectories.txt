@@ -1,0 +1,2 @@
+C:/rentwheels/android/app/.cxx/Debug/2z6m5p1w/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/rentwheels/android/app/.cxx/Debug/2z6m5p1w/armeabi-v7a/CMakeFiles/rebuild_cache.dir

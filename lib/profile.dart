@@ -104,12 +104,17 @@ class _ProfileState extends State<Profile> {
           ),
           TextButton(
             onPressed: () async {
-              if (newPhoneNumber.isNotEmpty) {
+              // Add validation for the phone number
+              if (newPhoneNumber.isNotEmpty &&
+                  newPhoneNumber.length == 10 &&
+                  RegExp(r'^[0-9]+$').hasMatch(newPhoneNumber)) {
+                String formattedPhoneNumber = "+91$newPhoneNumber";
+
                 try {
                   await FirebaseFirestore.instance
                       .collection("Users")
                       .doc(currentuser.email)
-                      .update({'phone_number': newPhoneNumber});
+                      .update({'phone_number': formattedPhoneNumber});
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Phone number updated successfully!')),
@@ -119,6 +124,10 @@ class _ProfileState extends State<Profile> {
                     const SnackBar(content: Text('Failed to update phone number. Please try again.')),
                   );
                 }
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Please enter a valid 10-digit phone number.')),
+                );
               }
               Navigator.pop(context);
             },
@@ -128,6 +137,7 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
+
 
   Future<void> deleteAccount() async {
     try {
@@ -164,7 +174,7 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  Future<void> becomeAdmin() async {
+  /*Future<void> becomeAdmin() async {
   final userData = await FirebaseFirestore.instance
       .collection("Users")
       .doc(currentuser.email)
@@ -199,7 +209,7 @@ class _ProfileState extends State<Profile> {
       const SnackBar(content: Text('Failed. Please try again.')),
     );
   }
-}
+}*/
 
   @override
   Widget build(BuildContext context) {
@@ -338,7 +348,7 @@ class _ProfileState extends State<Profile> {
                             ),
                     ),
 
-                    Padding(
+                    /*Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -363,7 +373,7 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
-                    ),
+                    ),*/
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
                       child: ElevatedButton(

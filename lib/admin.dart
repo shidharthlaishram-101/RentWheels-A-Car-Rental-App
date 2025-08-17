@@ -3,11 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rentwheels/add_vehicle.dart';
+import 'package:rentwheels/components/adminDrawer.dart';
 import 'package:rentwheels/services/Orders.dart';
-import 'package:rentwheels/services/adminNotif.dart';
 import 'package:rentwheels/update_vehicle.dart'; // Ensure this imports your update vehicle page
-import 'admin_profile.dart'; // Ensure this imports your profile page
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 
 // Define the primary color globally
@@ -26,7 +24,6 @@ void signUserOut() {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   // Placeholder for registration number
 
@@ -37,6 +34,8 @@ class _AdminPageState extends State<AdminPage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: Colors.grey[200],
+        endDrawer: adminDrawer(),
         // The main body of the Scaffold
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -59,60 +58,6 @@ class _AdminPageState extends State<AdminPage> {
               Tab(icon: Icon(Icons.receipt, color: Colors.white), text: "Orders"),
             ],
           ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AdminNotif()),
-                );
-              },
-              icon: const Icon(Icons.notifications, color: Colors.white,),
-            ),
-            IconButton(
-              icon: const Icon(Icons.person, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AdminProfile()),
-                );
-              },
-            ),
-            IconButton(
-              onPressed: () {
-                // Show a confirmation dialog for logout
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      backgroundColor: Colors.white,
-                      title: Text(
-                        'Confirm Logout',
-                        style: GoogleFonts.mulish(fontWeight: FontWeight.bold),
-                      ),
-                      content: Text('Are you sure you want to log out?'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog without logging out
-                          },
-                          child: const Text('No', style: TextStyle(color: Colors.black)),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            signUserOut(); // Proceed with signing out
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Yes', style: TextStyle(color: Colors.black)),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              icon: Icon(Icons.logout_outlined, color: Colors.white60),
-            ),
-          ],
         ),
         body: Stack(
           children: [
@@ -173,6 +118,7 @@ class CarsTab extends StatelessWidget {
                 children: snapshot.data!.docs.map((doc) {
                   final carData = doc.data() as Map<String, dynamic>;
                   return Card(
+                    color: Colors.white,
                     elevation: 4,
                     margin: const EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
@@ -205,6 +151,7 @@ class CarsTab extends StatelessWidget {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
+                                    backgroundColor: Colors.white,
                                     title: Text(
                                       'Delete Vehicle',
                                       style: GoogleFonts.mulish(fontWeight: FontWeight.bold),
@@ -215,14 +162,23 @@ class CarsTab extends StatelessWidget {
                                     ),
                                     actions: [
                                       TextButton(
-                                        child: const Text('Cancel'),
+                                        child: Text('Cancel',
+                                          style: GoogleFonts.mulish(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                        ),
                                         onPressed: () => Navigator.of(context).pop(false),
                                       ),
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: const Color.fromARGB(255, 207, 66, 56),
                                         ),
-                                        child: const Text('Delete'),
+                                        child: Text('Delete',
+                                          style: GoogleFonts.mulish(fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                         onPressed: () => Navigator.of(context).pop(true),
                                       ),
                                     ],
