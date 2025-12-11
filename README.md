@@ -39,8 +39,8 @@ Mobile app for renting cars with a smooth user experience, user/admin flows, and
 
 ## Demo Videos
 
-- User flow: <https://youtu.be/-tD_kSBihIM?si=ol-zQvNsQWm60Ob1>
-- Admin flow: <https://youtu.be/tYeuk3_esao?si=NvKZ2MW-HCvVsCeF>
+- User Side: <https://youtu.be/-tD_kSBihIM?si=ol-zQvNsQWm60Ob1>
+- Admin Side: <https://youtu.be/tYeuk3_esao?si=NvKZ2MW-HCvVsCeF>
 
 ## Contributing
 
